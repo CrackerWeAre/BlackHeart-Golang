@@ -1,9 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"github.com/ssoyyoung.p/BlackHeart-Golang/router"
+)
 
 func main() {
-	// [TODO] BlackHeart API Server with Golang
-	fmt.Println("Initialize blackheart project")
-	fmt.Println("Team Cracker")
+	r := router.Router()
+
+	r.Run()
 }
