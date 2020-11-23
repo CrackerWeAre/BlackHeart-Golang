@@ -3,7 +3,6 @@ package crud
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"os"
 	"time"
@@ -23,7 +22,6 @@ func getDBinfo() string {
 	json.Unmarshal(byteValue, &info)
 
 	DBinfo := info.Username + ":" + info.Password + "@tcp(" + info.Hostname + info.Port + ")/" + info.Database
-	fmt.Println(DBinfo)
 	return DBinfo
 }
 
@@ -32,9 +30,8 @@ func ConnectDB() *sql.DB {
 	DBinfo := getDBinfo()
 
 	db, err := sql.Open("mysql", DBinfo)
-	if err != nil {
-		fmt.Println(err)
-	}
+	utils.CheckErr(err)
+
 	// See "Important settings" section.
 	db.SetConnMaxLifetime(time.Minute * 3)
 	db.SetMaxOpenConns(10)
