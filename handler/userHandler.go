@@ -12,8 +12,11 @@ import (
 
 // GetUserList func
 func GetUserList(c *gin.Context) {
-	page, _ := strconv.Atoi(c.Param("page"))
-	maxResult, _ := strconv.Atoi(c.Param("maxResult"))
+	page, _ := strconv.Atoi(c.Query("page"))
+	maxResult, _ := strconv.Atoi(c.Query("maxResult"))
+
+	// page, _ := strconv.Atoi(c.Param("page"))
+	// maxResult, _ := strconv.Atoi(c.Param("maxResult"))
 	allUsers := mysql.GetUserList()
 
 	c.JSON(http.StatusOK, utils.PgSplit(allUsers, page, maxResult))
