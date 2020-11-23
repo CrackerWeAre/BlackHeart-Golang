@@ -12,7 +12,7 @@ func Router() *gin.Engine {
 	// User API Router
 	userAPI := r.Group("/user")
 	{
-		userAPI.GET("/list/:page/:maxResult", handler.GetUserList)
+		userAPI.GET("/list", handler.GetUserList)
 	}
 
 	return r
