@@ -11,9 +11,10 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o ./github.com/ssoyyoung.p/BlackHeart-Golang .
+#RUN go build -o ./github.com/ssoyyoung.p/BlackHeart-Golang .
 
 
 EXPOSE 8080
 
-CMD ["./github.com/ssoyyoung.p/BlackHeart-Golang"]
+#CMD ["./github.com/ssoyyoung.p/BlackHeart-Golang"]
+CMD go run main.go
