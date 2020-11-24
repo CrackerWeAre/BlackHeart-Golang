@@ -27,10 +27,16 @@ func CreateUser(c *gin.Context) {
 	user.Uemail = c.PostForm("uEmail")
 	user.Upw = c.PostForm("uPW")
 	user.Uname = c.PostForm("uName")
-	user.Ugender = c.PostForm("uGender")
-	user.Uphone = c.PostForm("uPhone")
-	user.Ubirth = c.PostForm("uBirth")
-	user.Uagree, _ = strconv.Atoi(c.PostForm("uAgree"))
+	if user.Uemail == "" || user.Upw == "" || user.Uname == "" {
+		c.String(http.StatusOK, "Uemail, Upw, Uname 값은 필수 입력사항입니다.")
+		return
+	}
+	user.Ugender = c.DefaultPostForm("uGender", "null")
+	user.Uaddr = c.DefaultPostForm("uAddr", "null")
+	user.Upost, _ = strconv.Atoi(c.DefaultPostForm("uPost", "0"))
+	user.Uphone = c.DefaultPostForm("uPhone", "null")
+	user.Ubirth = c.DefaultPostForm("uBirth", "2000-01-01")
+	user.Uagree, _ = strconv.Atoi(c.DefaultPostForm("uAgree", "0"))
 
 	mysql.InsertNewUser(user)
 }
