@@ -6,7 +6,7 @@ import (
 )
 
 // PgSplit func
-func PgSplit(inputData []model.UserList, page, maxResult int) interface{} {
+func PgSplit(inputData []model.User, page, maxResult int) interface{} {
 	if page == 0 {
 		return gin.H{"msg": "페이지는 1부터 시작됩니다."}
 	}

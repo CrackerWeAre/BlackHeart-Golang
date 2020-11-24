@@ -16,6 +16,7 @@ func Router() *gin.Engine {
 	userAPI := r.Group("/user")
 	{
 		userAPI.GET("/list", handler.GetUserList)
+		userAPI.POST("create", handler.CreateUser)
 	}
 
 	return r

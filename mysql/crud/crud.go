@@ -40,13 +40,13 @@ func ConnectDB() *sql.DB {
 	return db
 }
 
-// MultiRowQueryInUserList func
-func MultiRowQueryInUserList(query string) []model.UserList {
+// MultiRowQueryUserList func
+func MultiRowQueryUserList(query string) []model.User {
 	DB := ConnectDB()
 	defer DB.Close()
 
-	var user model.UserList
-	var allUsers []model.UserList
+	var user model.User
+	var allUsers []model.User
 
 	rows, err := DB.Query(query)
 	utils.CheckErr(err)
@@ -54,11 +54,21 @@ func MultiRowQueryInUserList(query string) []model.UserList {
 	defer rows.Close()
 
 	for rows.Next() {
-		err := rows.Scan(&user.UID, &user.Uemail, &user.Upw, &user.Uname, &user.Ugender, &user.Uaddr, &user.Uphone, &user.UjoinDate, &user.Ubirth, &user.Uagree, &user.Ulevel, &user.UjoinPath)
+		err := rows.Scan(&user.UID, &user.Uemail, &user.Upw, &user.Uname, &user.Ugender, &user.Uaddr, &user.Upost, &user.Uphone, &user.UjoinDate, &user.Ubirth, &user.Uagree, &user.Ulevel, &user.UjoinPath)
 		utils.CheckErr(err)
 
 		allUsers = append(allUsers, user)
 	}
 
 	return allUsers
+}
+
+// InsertRowUserList func
+func InsertRowUserList(query string, user model.User) {
+	DB := ConnectDB()
+	defer DB.Close()
+
+	_, err := DB.Exec(query, user.Uemail, user.Upw, user.Uname, user.Ugender, user.Uphone, user.Ubirth, user.Uagree)
+	utils.CheckErr(err)
+
 }
