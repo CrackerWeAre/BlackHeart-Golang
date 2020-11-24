@@ -9,15 +9,16 @@ type DBinfo struct {
 	Database string
 }
 
-// UserList struct > user_list
-type UserList struct {
+// User struct > user_list
+type User struct {
 	UID       int    `json:"uID"`
 	Uemail    string `json:"uEmail"`
 	Upw       string `json:"uPW"`
 	Uname     string `json:"uName"`
 	Ugender   string `json:"uGender"`
 	Uaddr     string `json:"uAddr"`
-	Uphone    int    `json:"uPhone"`
+	Upost     int    `json:"uPost"`
+	Uphone    string `json:"uPhone"`
 	UjoinDate string `json:"uJoinDate"`
 	Ubirth    string `json:"uBirth"`
 	Uagree    int    `json:"uAgree"`
