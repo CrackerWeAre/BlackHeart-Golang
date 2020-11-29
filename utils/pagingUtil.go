@@ -19,5 +19,5 @@ func PgSplit(inputData []model.User, page, maxResult int) interface{} {
 	if lastNum > len(inputData) {
 		return JSONReturnRes(true, inputData[startNum:])
 	}
-	return JSONReturnRes(true, inputData[startNum:])
+	return JSONReturnRes(true, inputData[startNum:lastNum])
 }
