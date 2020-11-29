@@ -72,6 +72,16 @@ func ExecQuery(query string) {
 	utils.CheckErr(err)
 }
 
+// UpdateUser func
+func UpdateUser(query string, user model.User) {
+	DB := ConnectDB()
+	defer DB.Close()
+
+	_, err := DB.Exec(query, user.Uname, user.Ugender, user.Uphone, user.Ubirth, user.Uagree, user.Ulevel, user.UID)
+	utils.CheckErr(err)
+
+}
+
 // InsertRowUserList func
 func InsertRowUserList(query string, user model.User) {
 	DB := ConnectDB()
@@ -83,15 +93,13 @@ func InsertRowUserList(query string, user model.User) {
 }
 
 // CheckUserExistInUserList func
-func CheckUserExistInUserList(email string) bool {
+func CheckUserExistInUserList(query string) bool {
 	DB := ConnectDB()
 	defer DB.Close()
 
 	var count int
 
-	query := "SELECT count(*) FROM user_list where uEmail=?"
-
-	err := DB.QueryRow(query, email).Scan(&count)
+	err := DB.QueryRow(query).Scan(&count)
 	if err == sql.ErrNoRows || count == 0 {
 		return false
 	}

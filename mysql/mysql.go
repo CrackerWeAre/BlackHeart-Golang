@@ -1,6 +1,8 @@
 package mysql
 
 import (
+	"strconv"
+
 	"github.com/ssoyyoung.p/BlackHeart-Golang/model"
 	"github.com/ssoyyoung.p/BlackHeart-Golang/mysql/crud"
 )
@@ -19,6 +21,13 @@ func DeleteUser(uID string) {
 	crud.ExecQuery(query)
 }
 
+// UpdateUser func
+func UpdateUser(user model.User) {
+	query := "UPDATE user_list SET uName=?, uGender=?, uPhone=?, uBirth=?, uAgree=?, uLevel=? WHERE uID=?"
+
+	crud.UpdateUser(query, user)
+}
+
 // InsertNewUser func
 func InsertNewUser(user model.User) {
 	query := `INSERT INTO user_list (uEmail, uPW, uName, uGender, uPhone, uBirth, uAgree) 
@@ -27,9 +36,16 @@ func InsertNewUser(user model.User) {
 	crud.InsertRowUserList(query, user)
 }
 
-// CheckExist func
-func CheckExist(uEmail string) bool {
-	return crud.CheckUserExistInUserList(uEmail)
+// CheckExistByEmail func
+func CheckExistByEmail(uEmail string) bool {
+	query := "SELECT count(*) FROM user_list where uEmail=" + uEmail
+	return crud.CheckUserExistInUserList(query)
+}
+
+// CheckExistByID func
+func CheckExistByID(uID int) bool {
+	query := "SELECT count(*) FROM user_list where uID=" + strconv.Itoa(uID)
+	return crud.CheckUserExistInUserList(query)
 }
 
 // LoginUser func
