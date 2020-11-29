@@ -20,3 +20,15 @@ func InsertNewUser(user model.User) {
 
 	crud.InsertRowUserList(query, user)
 }
+
+// CheckExist func
+func CheckExist(uEmail string) bool {
+	return crud.CheckUserExistInUserList(uEmail)
+}
+
+// LoginUser func
+func LoginUser(user model.User) bool {
+	query := "SELECT uEmail, uPW from user_list where uEmail=?"
+
+	return crud.GetEmailAndPwUserList(query, user)
+}

@@ -72,3 +72,40 @@ func InsertRowUserList(query string, user model.User) {
 	utils.CheckErr(err)
 
 }
+
+// CheckUserExistInUserList func
+func CheckUserExistInUserList(email string) bool {
+	DB := ConnectDB()
+	defer DB.Close()
+
+	var count int
+
+	query := "SELECT count(*) FROM user_list where uEmail=?"
+
+	err := DB.QueryRow(query, email).Scan(&count)
+	if err == sql.ErrNoRows || count == 0 {
+		return false
+	}
+
+	utils.CheckErr(err)
+	return true
+
+}
+
+// GetEmailAndPwUserList func
+func GetEmailAndPwUserList(query string, user model.User) bool {
+	DB := ConnectDB()
+	defer DB.Close()
+
+	inputPW := user.Upw
+
+	row := DB.QueryRow(query, user.Uemail)
+	err := row.Scan(&user.Uemail, &user.Upw)
+	utils.CheckErr(err)
+
+	if inputPW == user.Upw {
+		return true
+	}
+
+	return false
+}
