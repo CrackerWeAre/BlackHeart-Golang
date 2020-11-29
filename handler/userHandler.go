@@ -39,52 +39,32 @@ func DeleteUser(c *gin.Context) {
 
 // UpdateUser func
 func UpdateUser(c *gin.Context) {
-	user := model.User{}
-	user.UID, _ = strconv.Atoi(c.PostForm("uID"))
-	user.Uemail = c.PostForm("uEmail")
-	user.Uname = c.PostForm("uName")
-	user.Ugender = c.PostForm("uGender")
-	user.Uaddr = c.PostForm("uAddr")
-	user.Upost, _ = strconv.Atoi(c.PostForm("uPost"))
-	user.Uphone = c.PostForm("uPhone")
-	user.Ubirth = c.PostForm("uBirth")
-	user.Uagree, _ = strconv.Atoi(c.PostForm("uAgree"))
-	user.Ulevel, _ = strconv.Atoi(c.PostForm("uLevel"))
-
+	user := utils.ReadUser(c)
 	if user.UID == 0 || user.Uemail == "" {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
 			false, "uID, uEmail은 필수 입력사항입니다",
 		))
 		return
 	}
-	exist := mysql.CheckExistByID(user.UID)
-	if exist {
-		mysql.UpdateUser(user)
 
+	exist := mysql.CheckExistByID(user.UID)
+	if !exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
-			true, "유저정보가 업데이트 되었습니다",
+			false, "해당유저가 존재하지 않습니다",
 		))
 		return
 	}
 
+	mysql.UpdateUser(user)
 	c.JSON(http.StatusOK, utils.JSONReturnMsg(
-		false, "해당유저가 존재하지 않습니다",
+		true, "유저정보가 업데이트 되었습니다",
 	))
 	return
 }
 
 // CreateUser func
 func CreateUser(c *gin.Context) {
-	user := model.User{}
-	user.Uemail = c.PostForm("uEmail")
-	user.Upw = c.PostForm("uPW")
-	user.Uname = c.PostForm("uName")
-	user.Ugender = c.DefaultPostForm("uGender", "null")
-	user.Uaddr = c.DefaultPostForm("uAddr", "null")
-	user.Upost, _ = strconv.Atoi(c.DefaultPostForm("uPost", "0"))
-	user.Uphone = c.DefaultPostForm("uPhone", "null")
-	user.Ubirth = c.DefaultPostForm("uBirth", "2000-01-01")
-	user.Uagree, _ = strconv.Atoi(c.DefaultPostForm("uAgree", "0"))
+	user := utils.ReadUserWithDefault(c)
 
 	if user.Uemail == "" || user.Upw == "" || user.Uname == "" {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
@@ -120,26 +100,25 @@ func LoginUser(c *gin.Context) {
 		return
 	}
 	exist := mysql.CheckExistByEmail(user.Uemail)
-	if exist {
-		status := mysql.LoginUser(user)
-
-		if status {
-			c.JSON(http.StatusOK, utils.JSONReturnMsg(
-				true, "로그인에 성공했습니다",
-			))
-			return
-		}
+	if !exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
-			false, "잘못된 비밀번호 입니다",
+			false, "존재하지 않는 아이디 입니다",
 		))
 		return
 	}
 
+	status := mysql.LoginUser(user)
+
+	if status {
+		c.JSON(http.StatusOK, utils.JSONReturnMsg(
+			true, "로그인에 성공했습니다",
+		))
+		return
+	}
 	c.JSON(http.StatusOK, utils.JSONReturnMsg(
-		false, "존재하지 않는 아이디 입니다",
+		false, "잘못된 비밀번호 입니다",
 	))
 	return
-
 }
 
 // CheckExist func
