@@ -97,12 +97,14 @@ func CreateUser(c *gin.Context) {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
 			false, "해당 아이디의 유저가 이미 존재합니다",
 		))
+		return
 	}
 	mysql.InsertNewUser(user)
 
 	c.JSON(http.StatusOK, utils.JSONReturnMsg(
 		true, "유저가 생성되었습니다",
 	))
+	return
 }
 
 // LoginUser func
