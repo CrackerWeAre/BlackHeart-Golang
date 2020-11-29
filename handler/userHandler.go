@@ -60,7 +60,7 @@ func CreateUser(c *gin.Context) {
 	mysql.InsertNewUser(user)
 
 	c.JSON(http.StatusOK, utils.JSONReturnMsg(
-		true, "",
+		true, "유저가 생성되었습니다",
 	))
 }
 
@@ -82,7 +82,7 @@ func LoginUser(c *gin.Context) {
 
 		if status {
 			c.JSON(http.StatusOK, utils.JSONReturnMsg(
-				true, "",
+				true, "로그인에 성공했습니다",
 			))
 			return
 		}
