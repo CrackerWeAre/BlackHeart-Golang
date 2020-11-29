@@ -63,6 +63,15 @@ func MultiRowQueryUserList(query string) []model.User {
 	return allUsers
 }
 
+// ExecQuery func
+func ExecQuery(query string) {
+	DB := ConnectDB()
+	defer DB.Close()
+
+	_, err := DB.Exec(query)
+	utils.CheckErr(err)
+}
+
 // InsertRowUserList func
 func InsertRowUserList(query string, user model.User) {
 	DB := ConnectDB()
