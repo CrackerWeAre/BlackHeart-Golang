@@ -18,6 +18,7 @@ func Router() *gin.Engine {
 		userAPI.GET("/list", handler.GetUserList)
 		userAPI.GET("/delete", handler.DeleteUser)
 		userAPI.POST("/create", handler.CreateUser)
+		userAPI.POST("/update", handler.UpdateUser)
 
 		userAPI.POST("/login", handler.LoginUser)
 		userAPI.GET("/checkExist", handler.CheckExist)

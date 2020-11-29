@@ -37,6 +37,42 @@ func DeleteUser(c *gin.Context) {
 	))
 }
 
+// UpdateUser func
+func UpdateUser(c *gin.Context) {
+	user := model.User{}
+	user.UID, _ = strconv.Atoi(c.PostForm("uID"))
+	user.Uemail = c.PostForm("uEmail")
+	user.Uname = c.PostForm("uName")
+	user.Ugender = c.PostForm("uGender")
+	user.Uaddr = c.PostForm("uAddr")
+	user.Upost, _ = strconv.Atoi(c.PostForm("uPost"))
+	user.Uphone = c.PostForm("uPhone")
+	user.Ubirth = c.PostForm("uBirth")
+	user.Uagree, _ = strconv.Atoi(c.PostForm("uAgree"))
+	user.Ulevel, _ = strconv.Atoi(c.PostForm("uLevel"))
+
+	if user.UID == 0 || user.Uemail == "" {
+		c.JSON(http.StatusOK, utils.JSONReturnMsg(
+			false, "uID, uEmail은 필수 입력사항입니다",
+		))
+		return
+	}
+	exist := mysql.CheckExistByID(user.UID)
+	if exist {
+		mysql.UpdateUser(user)
+
+		c.JSON(http.StatusOK, utils.JSONReturnMsg(
+			true, "유저정보가 업데이트 되었습니다",
+		))
+		return
+	}
+
+	c.JSON(http.StatusOK, utils.JSONReturnMsg(
+		false, "해당유저가 존재하지 않습니다",
+	))
+	return
+}
+
 // CreateUser func
 func CreateUser(c *gin.Context) {
 	user := model.User{}
@@ -56,7 +92,12 @@ func CreateUser(c *gin.Context) {
 		))
 		return
 	}
-
+	exist := mysql.CheckExistByEmail(user.Uemail)
+	if exist {
+		c.JSON(http.StatusOK, utils.JSONReturnMsg(
+			false, "해당 아이디의 유저가 이미 존재합니다",
+		))
+	}
 	mysql.InsertNewUser(user)
 
 	c.JSON(http.StatusOK, utils.JSONReturnMsg(
@@ -76,7 +117,7 @@ func LoginUser(c *gin.Context) {
 		))
 		return
 	}
-	exist := mysql.CheckExist(user.Uemail)
+	exist := mysql.CheckExistByEmail(user.Uemail)
 	if exist {
 		status := mysql.LoginUser(user)
 
@@ -102,7 +143,7 @@ func LoginUser(c *gin.Context) {
 // CheckExist func
 func CheckExist(c *gin.Context) {
 	uEmail := c.Query("uEmail")
-	exist := mysql.CheckExist(uEmail)
+	exist := mysql.CheckExistByEmail(uEmail)
 
 	if exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
