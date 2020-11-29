@@ -22,6 +22,13 @@ func GetUserList(c *gin.Context) {
 	c.JSON(http.StatusOK, utils.PgSplit(allUsers, page, maxResult))
 }
 
+// DeleteUser func
+func DeleteUser(c *gin.Context) {
+	uID := c.Query("uID")
+
+	mysql.DeleteUser(uID)
+}
+
 // CreateUser func
 func CreateUser(c *gin.Context) {
 	user := model.User{}

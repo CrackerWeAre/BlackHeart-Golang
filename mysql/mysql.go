@@ -13,6 +13,12 @@ func GetUserList() []model.User {
 	return allUsers
 }
 
+// DeleteUser func
+func DeleteUser(uID string) {
+	query := "DELETE FROM user_list Where uID=" + uID
+	crud.ExecQuery(query)
+}
+
 // InsertNewUser func
 func InsertNewUser(user model.User) {
 	query := `INSERT INTO user_list (uEmail, uPW, uName, uGender, uPhone, uBirth, uAgree) 
