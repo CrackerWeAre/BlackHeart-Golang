@@ -1,6 +1,8 @@
 package utils
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 // JSONReturnMsg func
 func JSONReturnMsg(status bool, message string) gin.H {
@@ -12,10 +14,11 @@ func JSONReturnMsg(status bool, message string) gin.H {
 }
 
 // JSONReturnRes func
-func JSONReturnRes(status bool, result interface{}) gin.H {
+func JSONReturnRes(status bool, result interface{}, lastPage int) gin.H {
 
 	return gin.H{
-		"status": status,
-		"result": result,
+		"status":   status,
+		"result":   result,
+		"lastPage": lastPage,
 	}
 }
