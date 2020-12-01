@@ -16,7 +16,7 @@ func PgSplit(inputData []model.User, page, maxResult int) interface{} {
 	}
 
 	startNum, lastNum := maxResult*(page-1), maxResult*page
-	lastPage := (lastNum / page) + 1
+	lastPage := (len(inputData) / maxResult) + 1
 
 	if startNum >= len(inputData) {
 		return JSONReturnMsg(false, "해당 페이지에는 결과가 없습니다")
