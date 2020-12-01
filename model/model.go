@@ -25,3 +25,9 @@ type User struct {
 	Ulevel    int    `json:"uLevel"`
 	UjoinPath string `json:"uJoinPath"`
 }
+
+// Result struct
+type Result struct {
+	Ulist    []User
+	LastPage int
+}

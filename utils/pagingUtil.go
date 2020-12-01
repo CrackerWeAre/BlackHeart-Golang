@@ -4,6 +4,11 @@ import (
 	"github.com/ssoyyoung.p/BlackHeart-Golang/model"
 )
 
+type result struct {
+	result   []model.User
+	lastPage int
+}
+
 // PgSplit func
 func PgSplit(inputData []model.User, page, maxResult int) interface{} {
 	if page == 0 {
@@ -11,13 +16,15 @@ func PgSplit(inputData []model.User, page, maxResult int) interface{} {
 	}
 
 	startNum, lastNum := maxResult*(page-1), maxResult*page
+	lastPage := (lastNum / page) + 1
 
 	if startNum >= len(inputData) {
 		return JSONReturnMsg(false, "해당 페이지에는 결과가 없습니다")
 	}
 
 	if lastNum > len(inputData) {
-		return JSONReturnRes(true, inputData[startNum:])
+		return JSONReturnRes(true, inputData[startNum:], lastPage)
 	}
-	return JSONReturnRes(true, inputData[startNum:lastNum])
+
+	return JSONReturnRes(true, inputData[startNum:lastNum], lastPage)
 }
