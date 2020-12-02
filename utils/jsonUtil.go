@@ -22,3 +22,12 @@ func JSONReturnRes(status bool, result interface{}, lastPage int) gin.H {
 		"lastPage": lastPage,
 	}
 }
+
+// JSONReturnResult func
+func JSONReturnResult(status bool, result interface{}) gin.H {
+
+	return gin.H{
+		"status": status,
+		"result": result,
+	}
+}

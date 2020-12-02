@@ -26,8 +26,9 @@ type User struct {
 	UjoinPath string `json:"uJoinPath"`
 }
 
-// Result struct
-type Result struct {
-	Ulist    []User
-	LastPage int
+//LoginUser struct
+type LoginUser struct {
+	Token    string `json:"token"`
+	TokenEXP int64  `json:"tokenExp"`
+	Uemail   string `json:"uEmail"`
 }
