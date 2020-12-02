@@ -23,7 +23,7 @@ func DeleteUser(uID string) {
 
 // UpdateUser func
 func UpdateUser(user model.User) {
-	query := "UPDATE user_list SET uName=?, uGender=?, uPhone=?, uBirth=?, uAgree=?, uLevel=? WHERE uID=?"
+	query := "UPDATE user_list SET uName='?', uGender='?', uPhone='?', uBirth='?', uAgree='?', uLevel='?' WHERE uID=?"
 
 	crud.UpdateUser(query, user)
 }
@@ -31,14 +31,14 @@ func UpdateUser(user model.User) {
 // InsertNewUser func
 func InsertNewUser(user model.User) {
 	query := `INSERT INTO user_list (uEmail, uPW, uName, uGender, uPhone, uBirth, uAgree) 
-			  value (?,?,?,?,?,?,?)`
+			  value ('?','?','?','?','?','?','?')`
 
 	crud.InsertRowUserList(query, user)
 }
 
 // CheckExistByEmail func
 func CheckExistByEmail(uEmail string) bool {
-	query := "SELECT count(*) FROM user_list where uEmail=" + uEmail
+	query := "SELECT count(*) FROM user_list where uEmail='" + uEmail + "'"
 	return crud.CheckUserExistInUserList(query)
 }
 

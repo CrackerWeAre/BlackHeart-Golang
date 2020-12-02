@@ -3,6 +3,7 @@ package crud
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"time"
@@ -100,6 +101,7 @@ func CheckUserExistInUserList(query string) bool {
 	var count int
 
 	err := DB.QueryRow(query).Scan(&count)
+	fmt.Println(err)
 	if err == sql.ErrNoRows || count == 0 {
 		return false
 	}

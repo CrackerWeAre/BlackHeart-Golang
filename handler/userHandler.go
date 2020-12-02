@@ -3,7 +3,9 @@ package handler
 import (
 	"net/http"
 	"strconv"
+	"time"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 
 	"github.com/ssoyyoung.p/BlackHeart-Golang/model"
@@ -110,8 +112,25 @@ func LoginUser(c *gin.Context) {
 	status := mysql.LoginUser(user)
 
 	if status {
-		c.JSON(http.StatusOK, utils.JSONReturnMsg(
-			true, "로그인에 성공했습니다",
+		token := jwt.New(jwt.SigningMethodHS256)
+
+		claims := token.Claims.(jwt.MapClaims)
+		claims["userID"] = user.Uemail
+		claims["admin"] = false
+
+		expTime := time.Now().Add(time.Hour * 72).Unix()
+		claims["exp"] = expTime
+
+		t, err := token.SignedString([]byte("secret"))
+		utils.CheckErr(err)
+
+		var loginUser model.LoginUser
+		loginUser.Token = t
+		loginUser.TokenEXP = expTime
+		loginUser.Uemail = user.Uemail
+
+		c.JSON(http.StatusOK, utils.JSONReturnResult(
+			true, loginUser,
 		))
 		return
 	}
