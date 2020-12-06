@@ -3,7 +3,6 @@ package crud
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"os"
 	"time"
@@ -77,7 +76,6 @@ func ExecQuery(query string) {
 func UpdateUser(query string, user model.User) {
 	DB := ConnectDB()
 	defer DB.Close()
-
 	_, err := DB.Exec(query, user.Uname, user.Ugender, user.Uphone, user.Ubirth, user.Uagree, user.Ulevel, user.UID)
 	utils.CheckErr(err)
 
@@ -99,13 +97,10 @@ func CheckUserExistInUserList(query string) bool {
 	defer DB.Close()
 
 	var count int
-
 	err := DB.QueryRow(query).Scan(&count)
-	fmt.Println(err)
 	if err == sql.ErrNoRows || count == 0 {
 		return false
 	}
-
 	utils.CheckErr(err)
 	return true
 
