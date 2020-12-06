@@ -35,13 +35,12 @@ type LoginUser struct {
 
 // Order sturct
 type Order struct {
-	OID        int    `json:"oID"`
-	UID        string `json:"uID"`
-	OOrderNum  int    `json:"oOrderNum"`
-	OOrderDate string `json:"oOrderDate"`
-	PID        int    `json:"pID"`
-	PName      string `json:"pName"`
-
+	OID          int     `json:"oID"`
+	UID          string  `json:"uID"`
+	OOrderNum    int     `json:"oOrderNum"`
+	OOrderDate   string  `json:"oOrderDate"`
+	PID          int     `json:"pID"`
+	PName        string  `json:"pName"`
 	POption      string  `json:"pOption"`
 	PPrice       int     `json:"pPrice"`
 	PDistount    float32 `json:"pDiscount"`
