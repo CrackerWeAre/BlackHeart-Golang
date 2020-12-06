@@ -32,3 +32,23 @@ type LoginUser struct {
 	TokenEXP int64  `json:"tokenExp"`
 	Uemail   string `json:"uEmail"`
 }
+
+// Order sturct
+type Order struct {
+	OID          int     `json:"oID"`
+	UID          string  `json:"uID"`
+	OOrderNum    int     `json:"oOrderNum"`
+	OOrderDate   string  `json:"oOrderDate"`
+	PID          int     `json:"pID"`
+	PName        string  `json:"pName"`
+	POption      string  `json:"pOption"`
+	PPrice       int     `json:"pPrice"`
+	PDistount    float32 `json:"pDiscount"`
+	OQuentity    int     `json:"oQuentity"`
+	ODestination string  `json:"oDestination"`
+	OPhoneNum    string  `json:"oPhoneNum"`
+	OPayment     int     `json:"oPayment"`
+	OInvoice     int     `json:"oInvoice"`
+	ODelivery    int     `json:"oDelivery"`
+	OStatus      string  `oStatus:"oStatus"`
+}

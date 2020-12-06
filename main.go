@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	debug := false
+	debug := true
 	r := router.Router()
 
 	if debug {

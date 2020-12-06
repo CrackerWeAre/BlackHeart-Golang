@@ -3,6 +3,7 @@ package handler
 import (
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -23,12 +24,40 @@ func GetUserList(c *gin.Context) {
 	c.JSON(http.StatusOK, utils.PgSplit(allUsers, page, maxResult))
 }
 
+// GetUserDetail func
+func GetUserDetail(c *gin.Context) {
+	uEmail := c.Query("uEmail")
+
+	exist := mysql.CheckExistByEmail(uEmail)
+	if !exist {
+		c.JSON(http.StatusOK, utils.JSONReturnMsg(
+			false, "해당유저가 존재하지 않습니다",
+		))
+		return
+	}
+
+	userDetail := mysql.GetUserDetail(uEmail)
+
+	c.JSON(http.StatusOK, utils.JSONReturnResult(
+		true, userDetail,
+	))
+	return
+}
+
 // DeleteUser func
 func DeleteUser(c *gin.Context) {
 	uID := c.Query("uID")
 	if uID == "" {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
 			false, "올바른 uID 값을 입력해주세요",
+		))
+		return
+	}
+
+	if strings.Contains(uID, ",") {
+		mysql.DeleteMultiUser(uID)
+		c.JSON(http.StatusOK, utils.JSONReturnMsg(
+			true, "삭제되었습니다",
 		))
 		return
 	}

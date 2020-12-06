@@ -63,6 +63,20 @@ func MultiRowQueryUserList(query string) []model.User {
 	return allUsers
 }
 
+// RowQueryUserList func
+func RowQueryUserList(query string) model.User {
+	DB := ConnectDB()
+	defer DB.Close()
+
+	var user model.User
+
+	row := DB.QueryRow(query)
+	err := row.Scan(&user.UID, &user.Uemail, &user.Upw, &user.Uname, &user.Ugender, &user.Uaddr, &user.Upost, &user.Uphone, &user.UjoinDate, &user.Ubirth, &user.Uagree, &user.Ulevel, &user.UjoinPath)
+	utils.CheckErr(err)
+
+	return user
+}
+
 // ExecQuery func
 func ExecQuery(query string) {
 	DB := ConnectDB()

@@ -15,9 +15,23 @@ func GetUserList() []model.User {
 	return allUsers
 }
 
+// GetUserDetail func
+func GetUserDetail(uEmail string) model.User {
+	query := "SELECT * FROM user_list where uEmail='" + uEmail + "'"
+	userDetail := crud.RowQueryUserList(query)
+
+	return userDetail
+}
+
 // DeleteUser func
 func DeleteUser(uID string) {
 	query := "DELETE FROM user_list Where uID=" + uID
+	crud.ExecQuery(query)
+}
+
+// DeleteMultiUser func
+func DeleteMultiUser(uID string) {
+	query := "DELETE FROM user_list Where uID IN (" + uID + ")"
 	crud.ExecQuery(query)
 }
 
