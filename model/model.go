@@ -52,3 +52,13 @@ type Order struct {
 	ODelivery    int     `json:"oDelivery"`
 	OStatus      string  `oStatus:"oStatus"`
 }
+
+// Comment struct
+type Comment struct {
+	RCID         int    `json:"rcID"`
+	RID          int    `json:"rID"`
+	UID          int    `json:"uID"`
+	RCPW         string `json:"rcPW"`
+	RcContent    string `json:"rcContent"`
+	RcCreateDate string `json:"rcCreateDate"`
+}
