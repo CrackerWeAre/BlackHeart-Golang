@@ -31,7 +31,7 @@ func UpdateUser(user model.User) {
 // InsertNewUser func
 func InsertNewUser(user model.User) {
 	query := `INSERT INTO user_list (uEmail, uPW, uName, uGender, uPhone, uBirth, uAgree) 
-			  value ('?','?','?','?','?','?','?')`
+			  value (?,?,?,?,?,?,?)`
 
 	crud.InsertRowUserList(query, user)
 }

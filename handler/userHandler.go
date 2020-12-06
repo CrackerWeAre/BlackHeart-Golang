@@ -70,7 +70,7 @@ func CreateUser(c *gin.Context) {
 
 	if user.Uemail == "" || user.Upw == "" || user.Uname == "" {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
-			false, "Uemail, Upw, Uname, uAgree 값은 필수 입력사항입니다",
+			false, "uEmail, uPW, uName, uAgree 값은 필수 입력사항입니다",
 		))
 		return
 	}
