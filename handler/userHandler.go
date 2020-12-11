@@ -172,6 +172,13 @@ func LoginUser(c *gin.Context) {
 // CheckExist func
 func CheckExist(c *gin.Context) {
 	uEmail := c.Query("uEmail")
+
+	if uEmail == "" {
+		c.JSON(http.StatusOK, utils.JSONReturnMsg(
+			false, "uEmail 값이 없습니다",
+		))
+		return
+	}
 	exist := mysql.CheckExistByEmail(uEmail)
 
 	if exist {
