@@ -19,7 +19,7 @@ func GetOrderList(query string) []model.Order {
 	defer rows.Close()
 
 	for rows.Next() {
-		err := rows.Scan(&order.OID, &order.UID, &order.OOrderNum, &order.OOrderDate, &order.PID, &order.PName, &order.POption, &order.PPrice, &order.PDistount, &order.OQuentity, &order.ODestination, &order.OPhoneNum, &order.OPayment, &order.OInvoice, &order.ODelivery, &order.OStatus)
+		err := rows.Scan(&order.OID, &order.UID, &order.OOrderNum, &order.OOrderDate, &order.PID, &order.PName, &order.POption, &order.PPrice, &order.PDistount, &order.OQuantity, &order.ODestination, &order.OPhoneNum, &order.OPayment, &order.OInvoice, &order.ODelivery, &order.OStatus, &order.PListImage)
 		utils.CheckErr(err)
 
 		allOrders = append(allOrders, order)
