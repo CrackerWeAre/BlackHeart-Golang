@@ -44,13 +44,14 @@ type Order struct {
 	POption      string  `json:"pOption"`
 	PPrice       int     `json:"pPrice"`
 	PDistount    float32 `json:"pDiscount"`
-	OQuentity    int     `json:"oQuentity"`
+	OQuantity    int     `json:"oQuantity"`
 	ODestination string  `json:"oDestination"`
 	OPhoneNum    string  `json:"oPhoneNum"`
 	OPayment     int     `json:"oPayment"`
 	OInvoice     int     `json:"oInvoice"`
 	ODelivery    int     `json:"oDelivery"`
-	OStatus      string  `oStatus:"oStatus"`
+	OStatus      string  `json:"oStatus"`
+	PListImage   string  `json:"pListImage"`
 }
 
 // Comment struct
