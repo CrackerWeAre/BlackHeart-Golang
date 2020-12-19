@@ -105,6 +105,21 @@ func InsertRowUserList(query string, user model.User) {
 
 }
 
+// CheckUserExist func
+func CheckUserExist(query string) bool {
+	DB := ConnectDB()
+	defer DB.Close()
+
+	var count int
+	err := DB.QueryRow(query).Scan(&count)
+	if err == sql.ErrNoRows || count == 0 {
+		return false
+	}
+	utils.CheckErr(err)
+	return true
+
+}
+
 // CheckUserExistInUserList func
 func CheckUserExistInUserList(query string) bool {
 	DB := ConnectDB()
