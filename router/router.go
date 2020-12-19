@@ -43,5 +43,10 @@ func Router() *gin.Engine {
 		commentAPI.GET("/comment", handler.GetReviewCommentList)
 	}
 
+	productAPI := r.Group("/product")
+	{
+		productAPI.GET("/get", handler.GetProductItem)
+	}
+
 	return r
 }

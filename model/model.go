@@ -79,3 +79,22 @@ type ReviewBoard struct {
 	Rhit int `json:rHit`
 	Rlike int `json:rLike`
 }
+
+// Product
+type Product struct {
+	PID int `json:"pID"`
+	PCode string `json:"pCode"`
+	PName string `json:"pName"`
+	POption string `json:"pOption"`
+	PPrice int `json:"pPrice"`
+	PDiscount float32 `json:"pDiscount"`
+	PStock int `json:"pStock"`
+	PListImage string `json:"pListImage"`
+	PMainImage string `json:"pMainImage"`
+	PSubImage string `json:"pSubImage"`
+	PCategory1 string `json:"pCategory1"`
+	PCategory2 string `json:"pCategory2"`
+	PCategory3 string `json:"pCategory3"`
+	PDisplay int `json:"pDisplay"`
+	PSoldout int `json:"pSoldout"`
+}
