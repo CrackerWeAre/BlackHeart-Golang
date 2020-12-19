@@ -16,7 +16,7 @@ func ReadUserWithDefault(c *gin.Context) model.User {
 	user.Ugender = c.DefaultPostForm("uGender", "null")
 	user.Uaddr = c.DefaultPostForm("uAddr", "null")
 	user.Upost, _ = strconv.Atoi(c.DefaultPostForm("uPost", "0"))
-	user.Uphone = c.DefaultPostForm("uPhone", "null")
+	user.Uphone = c.PostForm("uPhone")
 	user.Ubirth = c.DefaultPostForm("uBirth", "2000-01-01")
 	user.Uagree, _ = strconv.Atoi(c.DefaultPostForm("uAgree", "0"))
 
