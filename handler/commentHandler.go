@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/ssoyyoung.p/BlackHeart-Golang/mysql"
@@ -12,6 +13,13 @@ import (
 func GetReviewCommentList(c *gin.Context) {
 
 	uID := c.Query("uID")
+	uIDint, _ := strconv.Atoi(uID)
+	exist := mysql.CheckExistByID(uIDint)
+
+	if !exist {
+		c.JSON(http.StatusOK, utils.JSONReturnMsg(
+			false, "해당 유저의 값이 존재하지 않습니다."))
+	}
 
 	commentList := mysql.GetReviewCommentList(uID)
 
@@ -25,6 +33,13 @@ func GetReviewCommentList(c *gin.Context) {
 func GetReviewBoardList(c *gin.Context) {
 
 	uID := c.Query("uID")
+	uIDint, _ := strconv.Atoi(uID)
+	exist := mysql.CheckExistByID(uIDint)
+
+	if !exist {
+		c.JSON(http.StatusOK, utils.JSONReturnMsg(
+			false, "해당 유저의 값이 존재하지 않습니다."))
+	}
 
 	commentList := mysql.GetReviewBoardList(uID)
 
@@ -32,4 +47,5 @@ func GetReviewBoardList(c *gin.Context) {
 		true, commentList,
 	))
 	return
+
 }

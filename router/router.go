@@ -26,6 +26,12 @@ func Router() *gin.Engine {
 
 	}
 
+	userAuth := r.Group("/auth")
+	{
+		userAuth.POST("/login", handler.Login)
+		userAuth.GET("/logout", handler.Logout)
+	}
+
 	orderAPI := r.Group("/order")
 	{
 		orderAPI.GET("/list", handler.GetOrderList)
