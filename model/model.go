@@ -31,6 +31,8 @@ type LoginUser struct {
 	Token    string `json:"token"`
 	TokenEXP int64  `json:"tokenExp"`
 	Uemail   string `json:"uEmail"`
+	Uname string `json:"uName"`
+	UID int `json:""uID""`
 }
 
 // Order sturct

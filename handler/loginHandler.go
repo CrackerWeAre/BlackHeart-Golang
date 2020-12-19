@@ -53,6 +53,8 @@ func Login(c *gin.Context) {
 	status := mysql.LoginUser(user)
 
 	if status {
+		userDetail := mysql.GetUserDetail(user.Uemail)
+
 		token := jwt.New(jwt.SigningMethodHS256)
 
 		claims := token.Claims.(jwt.MapClaims)
@@ -69,6 +71,8 @@ func Login(c *gin.Context) {
 		loginUser.Token = t
 		loginUser.TokenEXP = expTime
 		loginUser.Uemail = user.Uemail
+		loginUser.Uname = userDetail.Uname
+		loginUser.UID = userDetail.UID
 
 		c.SetCookie(
 			"blackheart", t,
