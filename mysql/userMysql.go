@@ -62,6 +62,10 @@ func CheckExistByID(uID int) bool {
 	return crud.CheckUserExistInUserList(query)
 }
 
+func CheckExist(query string) bool {
+	return crud.CheckUserExist(query)
+}
+
 // LoginUser func
 func LoginUser(user model.User) bool {
 	query := "SELECT uEmail, uPW from user_list where uEmail=?"
