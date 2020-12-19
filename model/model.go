@@ -54,12 +54,26 @@ type Order struct {
 	PListImage   string  `json:"pListImage"`
 }
 
-// Comment struct
-type Comment struct {
+// ReviewComment struct
+type ReviewComment struct {
 	RCID         int    `json:"rcID"`
 	RID          int    `json:"rID"`
 	UID          int    `json:"uID"`
 	RCPW         string `json:"rcPW"`
 	RcContent    string `json:"rcContent"`
 	RcCreateDate string `json:"rcCreateDate"`
+}
+
+// ReviewBoard
+type ReviewBoard struct {
+	RID int `json:rID`
+	PID int `json:pID`
+	UID string `json:uID`
+	Rrate float32 `json:rRate`
+	Rtitle string `json:rTitle`
+	Rcommnet string `json:rCommnet`
+	Rfile string `json:rFile`
+	RcreateDate string `json:rCreateDate`
+	Rhit int `json:rHit`
+	Rlike int `json:rLike`
 }
