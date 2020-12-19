@@ -97,9 +97,9 @@ func UpdateUser(c *gin.Context) {
 func CreateUser(c *gin.Context) {
 	user := utils.ReadUserWithDefault(c)
 
-	if user.Uemail == "" || user.Upw == "" || user.Uname == "" {
+	if user.Uemail == "" || user.Upw == "" || user.Uname == "" || user.Uphone == "  "{
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
-			false, "uEmail, uPW, uName, uAgree 값은 필수 입력사항입니다",
+			false, "uEmail, uPW, uName, uAgree, Uphone 값은 필수 입력사항입니다",
 		))
 		return
 	}
