@@ -6,13 +6,13 @@ import (
 )
 
 // GetCommentList func
-func GetCommentList(query string) []model.Comment {
+func GetCommentList(query string) []model.ReviewComment {
 
 	DB := ConnectDB()
 	defer DB.Close()
 
-	var cm model.Comment
-	var allCms []model.Comment
+	var cm model.ReviewComment
+	var allCms []model.ReviewComment
 
 	rows, err := DB.Query(query)
 	utils.CheckErr(err)
@@ -27,4 +27,28 @@ func GetCommentList(query string) []model.Comment {
 	}
 
 	return allCms
+}
+
+// GetBoardList func
+func GetBoardList(query string) []model.ReviewBoard {
+
+	DB := ConnectDB()
+	defer DB.Close()
+
+	var br model.ReviewBoard
+	var allBr []model.ReviewBoard
+
+	rows, err := DB.Query(query)
+	utils.CheckErr(err)
+
+	defer rows.Close()
+
+	for rows.Next() {
+		err := rows.Scan(&br.RID, &br.PID, &br.UID, &br.Rrate, &br.Rtitle, &br.Rcommnet, &br.Rfile, &br.RcreateDate, &br.Rhit, &br.Rlike)
+		utils.CheckErr(err)
+
+		allBr = append(allBr, br)
+	}
+
+	return allBr
 }

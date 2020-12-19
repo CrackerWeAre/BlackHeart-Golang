@@ -8,12 +8,25 @@ import (
 	"github.com/ssoyyoung.p/BlackHeart-Golang/utils"
 )
 
-// GetCommentList func
-func GetCommentList(c *gin.Context) {
+// GetReviewCommentList func
+func GetReviewCommentList(c *gin.Context) {
 
 	uID := c.Query("uID")
 
-	commentList := mysql.GetCommentList(uID)
+	commentList := mysql.GetReviewCommentList(uID)
+
+	c.JSON(http.StatusOK, utils.JSONReturnResult(
+		true, commentList,
+	))
+	return
+}
+
+// GetReviewBoardList func
+func GetReviewBoardList(c *gin.Context) {
+
+	uID := c.Query("uID")
+
+	commentList := mysql.GetReviewBoardList(uID)
 
 	c.JSON(http.StatusOK, utils.JSONReturnResult(
 		true, commentList,
