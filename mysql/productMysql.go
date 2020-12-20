@@ -12,3 +12,12 @@ func GetProductItem(pID string) model.Product {
 
 	return product
 }
+
+
+// GetProductList func
+func GetProductList() []model.Product {
+	query := "SELECT * FROM product_list"
+	allProducts := crud.GetProductList(query)
+
+	return allProducts
+}

@@ -98,3 +98,13 @@ type Product struct {
 	PDisplay int `json:"pDisplay"`
 	PSoldout int `json:"pSoldout"`
 }
+
+// Cart
+type Cart struct {
+	CID int
+	UID int
+	PID int
+	POption string
+	CQuantity string
+	Product Product
+}
