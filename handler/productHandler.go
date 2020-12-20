@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 
@@ -29,4 +30,14 @@ func GetProductItem(c *gin.Context) {
 	))
 	return
 
+}
+
+// GetProductList func
+func GetProductList(c *gin.Context) {
+	page, _ := strconv.Atoi(c.Query("page"))
+	maxResult, _ := strconv.Atoi(c.Query("maxResult"))
+
+	allProducts := mysql.GetProductList()
+
+	c.JSON(http.StatusOK, utils.PgSplitP(allProducts, page, maxResult))
 }
