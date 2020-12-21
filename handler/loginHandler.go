@@ -37,14 +37,14 @@ func Login(c *gin.Context) {
 	user.Upw = c.PostForm("uPW")
 
 	if user.Uemail == "" || user.Upw == "" {
-		c.JSON(http.StatusOK, utils.JSONReturnMsg(
+		c.JSON(http.StatusUnauthorized, utils.JSONReturnMsg(
 			false, "uEmail, uPW 값은 필수 입력사항입니다",
 		))
 		return
 	}
 	exist := mysql.CheckExistByEmail(user.Uemail)
 	if !exist {
-		c.JSON(http.StatusOK, utils.JSONReturnMsg(
+		c.JSON(http.StatusUnauthorized, utils.JSONReturnMsg(
 			false, "존재하지 않는 아이디 입니다",
 		))
 		return
@@ -89,7 +89,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, utils.JSONReturnMsg(
+	c.JSON(http.StatusUnauthorized, utils.JSONReturnMsg(
 		false, "잘못된 비밀번호 입니다",
 	))
 	return
