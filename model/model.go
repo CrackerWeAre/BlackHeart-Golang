@@ -68,17 +68,17 @@ type ReviewComment struct {
 
 // ReviewBoard
 type ReviewBoard struct {
-	RID int `json:rID`
-	PID int `json:pID`
-	UID string `json:uID`
-	Rrate float32 `json:rRate`
-	Rtitle string `json:rTitle`
-	Rcommnet string `json:rCommnet`
-	Rfile string `json:rFile`
-	RcreateDate string `json:rCreateDate`
-	Rhit int `json:rHit`
-	Rlike int `json:rLike`
-	Product Product `json:product`
+	RID int `json:"rID"`
+	PID int `json:"pID"`
+	UID string `json:"uID"`
+	Rrate float32 `json:"rRate"`
+	Rtitle string `json:"rTitle"`
+	Rcommnet string `json:"rCommnet"`
+	Rfile string `json:"rFile"`
+	RcreateDate string `json:"rCreateDate"`
+	Rhit int `json:"rHit"`
+	Rlike int `json:"rLike"`
+	Product Product `json:"product"`
 }
 
 // Product
@@ -102,10 +102,10 @@ type Product struct {
 
 // Cart
 type Cart struct {
-	CID int
-	UID int
-	PID int
-	POption string
-	CQuantity string
-	Product Product
+	CID int `json:"cID"`
+	UID int `json:"uID"`
+	PID int `json:"pID"`
+	POption string `json:"pOption"`
+	CQuantity string `json:"cQuantity"`
+	Product Product `json:"product"`
 }
