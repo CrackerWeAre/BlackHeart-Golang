@@ -13,9 +13,9 @@ import (
 
 func GetProductItem(c *gin.Context) {
 	pID := c.Query("pID")
+	pIDint, _ := strconv.Atoi(pID)
 
-	query := "SELECT count(*) FROM product_list where pID="+pID
-	exist := mysql.CheckExist(query)
+	exist := mysql.CheckExistByID("product_list", pIDint)
 
 	if !exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(

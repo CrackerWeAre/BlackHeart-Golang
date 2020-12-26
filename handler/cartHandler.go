@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 
@@ -9,11 +10,15 @@ import (
 	"github.com/ssoyyoung.p/BlackHeart-Golang/utils"
 )
 
+
 func GetCartList(c *gin.Context) {
 	uID := c.Query("uID")
+	uIDint, _ := strconv.Atoi(uID)
 
-	query := "SELECT count(*) FROM cart_list WHERE uID="+uID
-	exist := mysql.CheckExist(query)
+	//query := "SELECT count(*) FROM cart_list WHERE uID="+uID
+	//exist := mysql.CheckExist(query)
+
+	exist := mysql.CheckExistByID("cart_list", uIDint)
 
 	if !exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(

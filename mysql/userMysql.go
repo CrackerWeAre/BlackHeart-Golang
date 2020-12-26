@@ -51,14 +51,14 @@ func InsertNewUser(user model.User) {
 }
 
 // CheckExistByEmail func
-func CheckExistByEmail(uEmail string) bool {
-	query := "SELECT count(*) FROM user_list where uEmail='" + uEmail + "'"
+func CheckExistByEmail(dbName, uEmail string) bool {
+	query := "SELECT count(*) FROM "+dbName+" where uEmail='" + uEmail + "'"
 	return crud.CheckUserExistInUserList(query)
 }
 
 // CheckExistByID func
-func CheckExistByID(uID int) bool {
-	query := "SELECT count(*) FROM user_list where uID=" + strconv.Itoa(uID)
+func CheckExistByID(dbName string, uID int) bool {
+	query := "SELECT count(*) FROM "+dbName+" where uID=" + strconv.Itoa(uID)
 	return crud.CheckUserExistInUserList(query)
 }
 
