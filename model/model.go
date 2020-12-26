@@ -105,7 +105,6 @@ type Cart struct {
 	CID int `json:"cID"`
 	UID int `json:"uID"`
 	PID int `json:"pID"`
-	POption string `json:"pOption"`
-	CQuantity string `json:"cQuantity"`
+	CQuantity int `json:"cQuantity"`
 	Product Product `json:"product"`
 }

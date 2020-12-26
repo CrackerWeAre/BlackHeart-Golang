@@ -18,7 +18,7 @@ func GetCartList(query string) []model.Cart {
 	defer rows.Close()
 
 	for rows.Next() {
-		err := rows.Scan(&cart.CID, &cart.UID, &cart.PID, &cart.POption, &cart.CQuantity)
+		err := rows.Scan(&cart.CID, &cart.UID, &cart.PID, &cart.CQuantity)
 		utils.CheckErr(err)
 
 		allCarts = append(allCarts, cart)
