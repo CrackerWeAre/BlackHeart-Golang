@@ -29,7 +29,7 @@ func GetUserList(c *gin.Context) {
 func GetUserDetail(c *gin.Context) {
 	uEmail := c.Query("uEmail")
 
-	exist := mysql.CheckExistByEmail(uEmail)
+	exist := mysql.CheckExistByEmail("user_list", uEmail)
 	if !exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
 			false, "해당유저가 존재하지 않습니다",
@@ -80,7 +80,7 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 
-	exist := mysql.CheckExistByID(user.UID)
+	exist := mysql.CheckExistByID("user_list", user.UID)
 	if !exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
 			false, "해당유저가 존재하지 않습니다",
@@ -105,7 +105,7 @@ func CreateUser(c *gin.Context) {
 		))
 		return
 	}
-	exist := mysql.CheckExistByEmail(user.Uemail)
+	exist := mysql.CheckExistByEmail("user_list", user.Uemail)
 	if exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
 			false, "해당 아이디의 유저가 이미 존재합니다",
@@ -132,7 +132,7 @@ func LoginUser(c *gin.Context) {
 		))
 		return
 	}
-	exist := mysql.CheckExistByEmail(user.Uemail)
+	exist := mysql.CheckExistByEmail("user_list", user.Uemail)
 	if !exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
 			false, "존재하지 않는 아이디 입니다",
@@ -181,7 +181,7 @@ func CheckExist(c *gin.Context) {
 		))
 		return
 	}
-	exist := mysql.CheckExistByEmail(uEmail)
+	exist := mysql.CheckExistByEmail("user_list", uEmail)
 
 	if exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(

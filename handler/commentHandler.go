@@ -9,12 +9,13 @@ import (
 	"github.com/ssoyyoung.p/BlackHeart-Golang/utils"
 )
 
+
 // GetReviewCommentList func
 func GetReviewCommentList(c *gin.Context) {
 
 	uID := c.Query("uID")
 	uIDint, _ := strconv.Atoi(uID)
-	exist := mysql.CheckExistByID(uIDint)
+	exist := mysql.CheckExistByID("review_board", uIDint)
 
 	if !exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
@@ -35,7 +36,7 @@ func GetReviewBoardList(c *gin.Context) {
 
 	uID := c.Query("uID")
 	uIDint, _ := strconv.Atoi(uID)
-	exist := mysql.CheckExistByID(uIDint)
+	exist := mysql.CheckExistByID("review_board", uIDint)
 
 	if !exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(

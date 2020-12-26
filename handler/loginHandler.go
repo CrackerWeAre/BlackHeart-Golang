@@ -42,7 +42,7 @@ func Login(c *gin.Context) {
 		))
 		return
 	}
-	exist := mysql.CheckExistByEmail(user.Uemail)
+	exist := mysql.CheckExistByEmail("user_list",user.Uemail)
 	if !exist {
 		c.JSON(http.StatusUnauthorized, utils.JSONReturnMsg(
 			false, "존재하지 않는 아이디 입니다",
