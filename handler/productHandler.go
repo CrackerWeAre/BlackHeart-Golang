@@ -40,6 +40,7 @@ func GetProductList(c *gin.Context) {
 	allProducts := mysql.GetProductList()
 
 	c.JSON(http.StatusOK, utils.PgSplitP(allProducts, page, maxResult))
+	return
 }
 
 // GetProductByCate func
