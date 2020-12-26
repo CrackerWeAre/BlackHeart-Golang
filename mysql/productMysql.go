@@ -21,3 +21,12 @@ func GetProductList() []model.Product {
 
 	return allProducts
 }
+
+// GetProductByCate
+func GetProductByCate(filter string) []model.Product {
+	query := "SELECT * FROM product_list"+filter
+
+	product := crud.GetProductByCate(query)
+
+	return product
+}

@@ -52,6 +52,7 @@ func Router() *gin.Engine {
 	{
 		productAPI.GET("/detail", handler.GetProductItem)
 		productAPI.GET("/list", handler.GetProductList)
+		productAPI.GET("/cate", handler.GetProductByCate)
 	}
 
 	return r

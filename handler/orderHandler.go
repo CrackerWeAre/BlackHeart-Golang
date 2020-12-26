@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,7 +11,6 @@ import (
 // GetOrderList func
 func GetOrderList(c *gin.Context) {
 	uID := c.Query("uID")
-	fmt.Println(uID)
 
 	orderList := mysql.GetOrderList(uID)
 
