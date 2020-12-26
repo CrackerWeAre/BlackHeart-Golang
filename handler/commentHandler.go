@@ -19,6 +19,7 @@ func GetReviewCommentList(c *gin.Context) {
 	if !exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
 			false, "해당 유저의 값이 존재하지 않습니다."))
+		return
 	}
 
 	commentList := mysql.GetReviewCommentList(uID)
@@ -39,6 +40,7 @@ func GetReviewBoardList(c *gin.Context) {
 	if !exist {
 		c.JSON(http.StatusOK, utils.JSONReturnMsg(
 			false, "해당 유저의 값이 존재하지 않습니다."))
+		return
 	}
 
 	commentList := mysql.GetReviewBoardList(uID)

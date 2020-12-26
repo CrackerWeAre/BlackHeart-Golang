@@ -26,4 +26,5 @@ func GetCartList(c *gin.Context) {
 	c.JSON(http.StatusOK, utils.JSONReturnResult(
 		true, cartList,
 		))
+	return
 }

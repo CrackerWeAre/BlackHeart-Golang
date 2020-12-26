@@ -22,6 +22,7 @@ func GetUserList(c *gin.Context) {
 	allUsers := mysql.GetUserList()
 
 	c.JSON(http.StatusOK, utils.PgSplit(allUsers, page, maxResult))
+	return
 }
 
 // GetUserDetail func
@@ -66,6 +67,7 @@ func DeleteUser(c *gin.Context) {
 	c.JSON(http.StatusOK, utils.JSONReturnMsg(
 		true, "삭제되었습니다",
 	))
+	return
 }
 
 // UpdateUser func
