@@ -46,6 +46,15 @@ func GetReviewBoardList(c *gin.Context) {
 
 	commentList := mysql.GetReviewBoardList(uID)
 
+
+	for idx, comment := range commentList {
+		pID := strconv.Itoa(comment.PID)
+		product := mysql.GetProductItem(pID)
+
+		commentList[idx].Product = product
+	}
+
+
 	c.JSON(http.StatusOK, utils.JSONReturnResult(
 		true, commentList,
 	))
