@@ -15,8 +15,11 @@ func GetCartList(c *gin.Context) {
 	uID := c.Query("uID")
 	uIDint, _ := strconv.Atoi(uID)
 
-	//query := "SELECT count(*) FROM cart_list WHERE uID="+uID
-	//exist := mysql.CheckExist(query)
+	if uID == "" {
+		c.JSON(http.StatusOK, utils.JSONReturnMsg(
+			false, "uID는 필수 파라미터 입니다."))
+		return
+	}
 
 	exist := mysql.CheckExistByID("cart_list", uIDint)
 
@@ -28,6 +31,14 @@ func GetCartList(c *gin.Context) {
 	}
 
 	cartList := mysql.GetCartList(uID)
+
+	for idx, cart := range cartList {
+		pID := strconv.Itoa(cart.PID)
+		product := mysql.GetProductItem(pID)
+
+		cartList[idx].Product = product
+	}
+
 	c.JSON(http.StatusOK, utils.JSONReturnResult(
 		true, cartList,
 		))

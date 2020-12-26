@@ -28,6 +28,7 @@ func GetOrderList(c *gin.Context) {
 			false, "해당 uID의 주문 내역이 존재하지 않습니다"))
 		return
 	}
+
 	orderList := mysql.GetOrderList(uID)
 
 	for idx, order := range orderList {
