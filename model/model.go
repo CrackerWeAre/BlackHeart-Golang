@@ -78,6 +78,7 @@ type ReviewBoard struct {
 	RcreateDate string `json:rCreateDate`
 	Rhit int `json:rHit`
 	Rlike int `json:rLike`
+	Product Product `json:product`
 }
 
 // Product
