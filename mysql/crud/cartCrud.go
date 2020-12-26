@@ -5,15 +5,26 @@ import (
 	"github.com/ssoyyoung.p/BlackHeart-Golang/utils"
 )
 
-func GetCartItem(query string) model.Cart {
+func GetCartList(query string) []model.Cart {
 	DB := ConnectDB()
 	defer DB.Close()
 
 	var cart model.Cart
+	var allCarts []model.Cart
 
-	row := DB.QueryRow(query)
-	err := row.Scan(&cart.CID, &cart.UID, &cart.PID, &cart.POption, &cart.CQuantity)
+	rows, err := DB.Query(query)
 	utils.CheckErr(err)
 
-	return cart
+	defer rows.Close()
+
+	for rows.Next() {
+		err := rows.Scan(&cart.CID, &cart.UID, &cart.PID, &cart.POption, &cart.CQuantity)
+		utils.CheckErr(err)
+
+		allCarts = append(allCarts, cart)
+	}
+
+
+
+	return allCarts
 }
