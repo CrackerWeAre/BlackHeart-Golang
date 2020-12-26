@@ -8,6 +8,7 @@ import (
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
+
 	"github.com/ssoyyoung.p/BlackHeart-Golang/model"
 	"github.com/ssoyyoung.p/BlackHeart-Golang/utils"
 )
