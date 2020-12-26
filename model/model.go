@@ -53,7 +53,7 @@ type Order struct {
 	OInvoice     int     `json:"oInvoice"`
 	ODelivery    int     `json:"oDelivery"`
 	OStatus      string  `json:"oStatus"`
-	PListImage   string  `json:"pListImage"`
+	Product Product `json:"product"`
 }
 
 // ReviewComment struct
