@@ -73,7 +73,7 @@ type ReviewBoard struct {
 	UID string `json:"uID"`
 	Rrate float32 `json:"rRate"`
 	Rtitle string `json:"rTitle"`
-	Rcommnet string `json:"rCommnet"`
+	Rcontent string `json:"rContent"`
 	Rfile string `json:"rFile"`
 	RcreateDate string `json:"rCreateDate"`
 	Rhit int `json:"rHit"`

@@ -44,7 +44,7 @@ func GetBoardList(query string) []model.ReviewBoard {
 	defer rows.Close()
 
 	for rows.Next() {
-		err := rows.Scan(&br.RID, &br.PID, &br.UID, &br.Rrate, &br.Rtitle, &br.Rcommnet, &br.Rfile, &br.RcreateDate, &br.Rhit, &br.Rlike)
+		err := rows.Scan(&br.RID, &br.PID, &br.UID, &br.Rrate, &br.Rtitle, &br.Rcontent, &br.Rfile, &br.RcreateDate, &br.Rhit, &br.Rlike)
 		utils.CheckErr(err)
 
 		allBr = append(allBr, br)
